@@ -1,15 +1,15 @@
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MapView from "react-native-maps";
 import * as Location from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
-import { FAB } from "react-native-paper";
+import { FAB, Modal } from "react-native-paper";
 import theme from "../../assets/theme";
 
 export default function Index() {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [loading, setLoading] = useState(true);
     const [locationPermissionDenied, setLocationPermissionDenied] = useState(false);
+    const [visible, setVisible] = useState(false)
     const mapRef = useRef<MapView>(null);
 
     const requestLocationPermission = async () => {
