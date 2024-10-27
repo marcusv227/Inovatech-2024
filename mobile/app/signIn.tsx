@@ -6,6 +6,7 @@ import { Button } from '../src/components/button';
 import LogoSvg from "../assets/logo.svg"
 import { useRouter } from 'expo-router'
 import { Modal } from '../src/components/modal';
+import {styles}  from './styles/stylesSignIn'
 
 import { useForm, Controller } from 'react-hook-form';
 
@@ -15,6 +16,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 type FormDataProps = {
   name: string
   email: string
+  number: string
+  cpf: string
   password: string
   password_confirm: string
 }
@@ -22,6 +25,8 @@ type FormDataProps = {
 const signUpSchema = yup.object({
   name: yup.string().required("Informe o nome"),
   email: yup.string().required("Informe o email").email("Email inválido"),
+  cpf: yup.string().required("Informe o CPF").min(11, "O CPF deve ter 11 dígitos"),
+  number: yup.string().required("Informe o número").min(11, "O número deve ter 11 digitos"),
   password: yup.string().required("Informe a senha").min(6, "A senha dever ter pelo menos 6 dígitos"),
   password_confirm: yup.string().required('Confirme sua senha').oneOf([yup.ref("password"), ""], "A senha não confere")
 
@@ -58,8 +63,8 @@ export default function SignIn() {
       <View style={styles.formContainer}>
         <View>
           <View style={styles.logo}>
-            <LogoSvg />
-            <Text style={{ fontFamily: 'Inter-Black' }} variant='headlineLarge' >Crie sua conta</Text>
+            
+            <Text  variant='headlineLarge' >Crie sua conta</Text>
         </View>
           </View>
           
@@ -108,6 +113,51 @@ export default function SignIn() {
           }
 
 
+        </View>
+        <View style={styles.input}>
+          <Text style={styles.inputLabel}>Digite seu CPF</Text>
+
+          <Controller 
+          control={control} 
+          name='cpf' 
+        
+          render={({ field: {onChange, value}}) => (
+            <TextInput
+              placeholder='Digite seu CPF...'  
+              mode="outlined" 
+              theme={{colors: {background: "ffffff"} }}
+              onChangeText={onChange}
+              value={value}
+              
+              
+            />
+          )}/>
+          {
+            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
+          }
+        </View>
+        <View style={styles.input}>
+          <Text style={styles.inputLabel}>Digite seu número</Text>
+
+          <Controller 
+          control={control} 
+          name='number' 
+        
+          render={({ field: {onChange, value}}) => (
+            <TextInput
+              placeholder='Digite seu número...'  
+              mode="outlined" 
+
+              theme={{colors: {background: "ffffff"} }}
+              onChangeText={onChange}
+              value={value}
+              
+              
+            />
+          )}/>
+          {
+            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
+          }
         </View>
 
         <View style={styles.input}>
@@ -174,60 +224,6 @@ export default function SignIn() {
   );
 }
 
-const styles = StyleSheet.create({
-  
-  container: {
-    flex: 1,
-    padding: 24,
-    justifyContent: 'space-between', 
-    
-  },
-  formContainer: {
-    flex: 1,
-    justifyContent: 'center', 
-    gap: 10, 
-  },
-  input: {
-    gap: 8
-  },
-  inputLabel: {
-    fontSize: 16,
-    fontWeight: 'bold', 
-  },
-  title: {
-    
-    fontSize: 24,           
-    fontWeight: 'bold',      
-    textAlign: 'center',   
-
-  },
-  text: {
-    fontSize:14,
-    textAlign: 'right',
-    alignSelf: 'flex-end',
-    color: '#2563eb'
-  },
-  createButton: {
-    flexDirection: 'row',  
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    gap: 8,
-    marginTop: 8
-   
-  },
-  button: {
-    flex: 1,
-    borderWidth: 8,
-    borderRadius: 8
-  },
-  icon: {
-    color: "#"
-  },
-  logo: {
-      alignSelf: 'center',
-  }
-  
-});
 
 
 SignIn.options = {

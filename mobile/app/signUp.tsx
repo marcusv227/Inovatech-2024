@@ -4,9 +4,10 @@ import { StyleSheet,ScrollView, } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { Button } from '../src/components/button';
 import { useRouter } from 'expo-router';
+import {styles}  from './styles/stylesSignUp'
 
-
-import LogoSvg from '../assets/logo.svg'
+import LogoLogin from '../assets/logo.svg'
+import TipoLogin from '../assets/tipo.svg'
 import { useForm, Controller } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -42,11 +43,12 @@ export default function signUp() {
       <View style={styles.formContainer}>
 
         <View style={styles.logo}>
-            <LogoSvg />
-            <Text variant='headlineLarge' style={{ fontFamily: 'Inter_900Black', fontSize: 40 }}>Acesse a conta</Text>
+            <LogoLogin />
+            <TipoLogin style={styles.tipoLogin}/>
+            
         </View>
 
-        
+        <Text style={styles.title}>Acesse a conta</Text>
         <View style={styles.input}>
           <Text style={styles.inputLabel}>E-mail</Text>
 
@@ -116,41 +118,4 @@ export default function signUp() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    justifyContent: 'space-between', 
-  },
-  formContainer: {
-    flex: 1,
-    justifyContent: 'center', 
-    gap: 16, 
-  },
-  input: {
-    gap: 4
-  },
-  inputLabel: {
-    fontSize: 16,
-    fontWeight: 'bold', 
-  },
-  title: {
-    fontSize: 24,           
-    fontWeight: 'bold',      
-    textAlign: 'center',   
-  },
-  text: {
-    fontSize:14,
-    textAlign: 'right',
-    alignSelf: 'flex-end',
-    color: '#2563eb'
-  },
-  createButton: {
-    justifyContent: 'flex-end', 
-    gap: 8, 
-  },
-  logo: {
-    alignSelf: 'center',
-  
-}
-});
+
