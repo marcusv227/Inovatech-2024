@@ -1,16 +1,15 @@
-// theme.tsx
 import { MD3LightTheme } from 'react-native-paper';
 
 const theme = {
   ...MD3LightTheme,
   colors: {
     ...MD3LightTheme.colors,
-    primary: '#4A90E2', 
-    safe: '#7ED321',    
-    alert: '#D9534F',    
-    informative: '#F5A623',
-    text: '#4A4A4A',     
-    background: '#FFFFFF',
+    primary: '#2C3643',       
+    safe: '#5A7F94',            
+    alert: '#D9534F',           
+    informative: '#667F88',     
+    text: '#333333',            
+    background: '#F2F2F2',      
   },
 };
 

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20,
-        backgroundColor: '#1E90FF',
+        backgroundColor: theme.colors.primary,
         padding: 10,
         borderRadius: 50,
         elevation: 5,
@@ -147,16 +147,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     permissionButton: {
-        backgroundColor: '#1E90FF',
+        backgroundColor: theme.colors.primary,
         padding: 10,
         borderRadius: 8,
     },
     buttonText: {
-        color: '#fff',
+        color: theme.colors.text,
         fontWeight: 'bold',
     },
     fab: {
-        backgroundColor: "#1C90FF",
+        backgroundColor: theme.colors.primary,
         position: 'absolute',
         margin: 16,
         right: 0,

@@ -13,6 +13,7 @@ const TabLayout = () => {
         options={{
           title: 'Map',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="map" color={color} />,
+          tabBarActiveTintColor: '#333333'
         }}
       />
       <Tabs.Screen
@@ -20,6 +21,7 @@ const TabLayout = () => {
         options={{
           title: 'Alerts',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="warning" color={color} />,
+          tabBarActiveTintColor: '#333333'
         }}
       />
       <Tabs.Screen
@@ -27,6 +29,7 @@ const TabLayout = () => {
         options={{
           title: 'Profile',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+          tabBarActiveTintColor: '#333333'
         }}
       />
     </Tabs>

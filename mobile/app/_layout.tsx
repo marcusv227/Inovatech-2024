@@ -1,12 +1,17 @@
 import { Stack } from 'expo-router/stack';
-import { PaperProvider } from 'react-native-paper';
-import theme from '../assets/theme';
 
+import theme from '../assets/theme';
+import {
+    MD3LightTheme as DefaultTheme,
+    PaperProvider,
+  } from 'react-native-paper';
+  
 export default function Layout() {
     return (
         <PaperProvider theme={theme}>
-            <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack screenOptions={{
+                 headerShown: false,}}>
+                <Stack.Screen name="(tabs)"  />
             </Stack>
         </PaperProvider>
     );
