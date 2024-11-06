@@ -5,6 +5,12 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  button: {
+    color: theme.colors.primary,
+  },
+  buttonContainer: {
+    marginTop: 20,
+  },
   header: {
     justifyContent: 'space-between',
     alignItems: 'center',

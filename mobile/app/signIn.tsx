@@ -1,9 +1,8 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StyleSheet,ScrollView } from 'react-native';
-import { TextInput, Text,  Portal, Dialog } from 'react-native-paper';
+import { ScrollView } from 'react-native';
+import { TextInput, Text } from 'react-native-paper';
 import { Button } from '../src/components/button';
-import LogoSvg from "../assets/logo.svg"
 import { useRouter } from 'expo-router'
 import { Modal } from '../src/components/modal';
 import {styles}  from './styles/stylesSignIn'
@@ -33,7 +32,7 @@ const signUpSchema = yup.object({
 })
 
 
-export default function SignIn() {
+export default function SignIn({ setScreen }) {
   const {control,handleSubmit, formState: {errors} } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema)
   });
@@ -210,7 +209,7 @@ export default function SignIn() {
 
       
         <View style={styles.createButton}>
-          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={showModal}/>
+          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={() => setScreen('logo')}/>
           <Button children='Criar ' mode='contained' icon="check" style={styles.button} onPress={handleSubmit(handleSignUp)}/>
         </View>
         

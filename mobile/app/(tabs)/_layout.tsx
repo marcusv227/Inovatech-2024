@@ -25,9 +25,9 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="user"
         options={{
-          title: 'Profile',
+          title: 'User',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
           tabBarActiveTintColor: '#333333'
         }}
