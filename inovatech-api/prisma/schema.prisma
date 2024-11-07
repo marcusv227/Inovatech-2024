@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int   @id @default(autoincrement())
+  email    String   @unique
+  name     String
+  password String   @db.Uuid
+  dangerZones DangerZone[]
+}
+
+
+model DangerZone {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  perimeter Float
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+
+  User User[]
+}
+
