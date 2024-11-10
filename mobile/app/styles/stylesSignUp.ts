@@ -35,10 +35,9 @@ export const styles = StyleSheet.create({
       gap: 8, 
     },
     logo: {
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end', 
-      flexDirection: 'row', 
-      left: -10,
+      justifyContent: 'center',
+      alignItems: 'center', 
+      flexDirection: 'row',
     },
     tipoLogin: {
       marginLeft: -25,

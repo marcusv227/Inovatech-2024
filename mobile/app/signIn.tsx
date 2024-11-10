@@ -1,9 +1,8 @@
 import { View } from 'react-native';
 import React from 'react';
-import { StyleSheet,ScrollView } from 'react-native';
-import { TextInput, Text,  Portal, Dialog } from 'react-native-paper';
+import { ScrollView } from 'react-native';
+import { TextInput, Text } from 'react-native-paper';
 import { Button } from '../src/components/button';
-import LogoSvg from "../assets/logo.svg"
 import { useRouter } from 'expo-router'
 import { Modal } from '../src/components/modal';
 import {styles}  from './styles/stylesSignIn'
@@ -25,15 +24,13 @@ type FormDataProps = {
 const signUpSchema = yup.object({
   name: yup.string().required("Informe o nome"),
   email: yup.string().required("Informe o email").email("Email inválido"),
-  cpf: yup.string().required("Informe o CPF").min(11, "O CPF deve ter 11 dígitos"),
-  number: yup.string().required("Informe o número").min(11, "O número deve ter 11 digitos"),
   password: yup.string().required("Informe a senha").min(6, "A senha dever ter pelo menos 6 dígitos"),
   password_confirm: yup.string().required('Confirme sua senha').oneOf([yup.ref("password"), ""], "A senha não confere")
 
 })
 
 
-export default function SignIn() {
+export default function SignIn({ setScreen }) {
   const {control,handleSubmit, formState: {errors} } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema)
   });
@@ -114,51 +111,6 @@ export default function SignIn() {
 
 
         </View>
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>Digite seu CPF</Text>
-
-          <Controller 
-          control={control} 
-          name='cpf' 
-        
-          render={({ field: {onChange, value}}) => (
-            <TextInput
-              placeholder='Digite seu CPF...'  
-              mode="outlined" 
-              theme={{colors: {background: "ffffff"} }}
-              onChangeText={onChange}
-              value={value}
-              
-              
-            />
-          )}/>
-          {
-            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
-          }
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>Digite seu número</Text>
-
-          <Controller 
-          control={control} 
-          name='number' 
-        
-          render={({ field: {onChange, value}}) => (
-            <TextInput
-              placeholder='Digite seu número...'  
-              mode="outlined" 
-
-              theme={{colors: {background: "ffffff"} }}
-              onChangeText={onChange}
-              value={value}
-              
-              
-            />
-          )}/>
-          {
-            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
-          }
-        </View>
 
         <View style={styles.input}>
           <Text style={styles.inputLabel}>Senha</Text>
@@ -210,14 +162,12 @@ export default function SignIn() {
 
       
         <View style={styles.createButton}>
-          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={showModal}/>
+          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={() => setScreen('logo')}/>
           <Button children='Criar ' mode='contained' icon="check" style={styles.button} onPress={handleSubmit(handleSignUp)}/>
         </View>
         
       </View>
-        <Modal message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={handleConfirmBack} onDismiss={hideModal}/>
-    
-      
+        <Modal message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={handleConfirmBack} onDismiss={hideModal}/>  
     </View>
   </ScrollView>
     

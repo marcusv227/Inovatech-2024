@@ -5,6 +5,25 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  createButton: {
+    marginTop: 50,
+    flexDirection: 'column',  
+    alignItems: 'center',
+    gap: 10,
+    width: '100%',
+    paddingHorizontal: 16,
+  },
+  button: {
+    height: 50,
+    justifyContent: 'center',
+    width: '80%',
+    borderRadius: 8,
+  },
+  buttonContainer: {
+    marginTop: 130,
+    alignItems: 'center',
+    gap: 10,
+  },
   header: {
     justifyContent: 'space-between',
     alignItems: 'center',

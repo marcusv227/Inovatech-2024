@@ -1,13 +1,12 @@
 
 import { View } from 'react-native';
-import { StyleSheet,ScrollView, } from 'react-native';
+import { StyleSheet, ScrollView, } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { Button } from '../src/components/button';
 import { useRouter } from 'expo-router';
-import {styles}  from './styles/stylesSignUp'
+import { styles } from './styles/stylesSignUp'
 
-import LogoLogin from '../assets/logo.svg'
-import TipoLogin from '../assets/tipo.svg'
+import FullLogo from '../assets/SafewaysLogoFullLateral.svg'
 import { useForm, Controller } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -24,97 +23,96 @@ const signProfileSchema = yup.object({
 
 })
 
-export default function signUp() {
-  
-  const {control,handleSubmit, formState: {errors} } = useForm<FormDataProps>({
+export default function signUp({ setScreen }) {
+
+  const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     resolver: yupResolver(signProfileSchema)
   });
 
   const router = useRouter();
 
-  function handleSignUp({email,password}:FormDataProps){
-    console.log(email,password)
+  function handleSignUp({ email, password }: FormDataProps) {
+    console.log(email, password)
   }
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
-        
-    
-      <View style={styles.formContainer}>
 
-        <View style={styles.logo}>
-            <LogoLogin />
-            <TipoLogin style={styles.tipoLogin}/>
-            
+
+        <View style={styles.formContainer}>
+
+          <View style={styles.logo}>
+            <FullLogo />
+          </View>
+
+          <Text style={styles.title}>Acesse a conta</Text>
+          <View style={styles.input}>
+            <Text style={styles.inputLabel}>E-mail</Text>
+
+            <Controller
+              control={control}
+              name='email'
+
+              render={({ field: { onChange, value } }) => (
+                <TextInput
+                  placeholder='Digite seu email...'
+                  mode="outlined"
+
+                  right={<TextInput.Icon icon='email' />}
+                  theme={{ colors: { background: "ffffff" } }}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )} />
+            {
+              errors.email?.message && <Text style={{ color: 'red' }}>{errors.email.message}</Text>
+            }
+
+
+          </View>
+
+          <View style={styles.input}>
+            <Text style={styles.inputLabel}>Senha</Text>
+
+            <Controller
+              control={control}
+              name='password'
+
+              render={({ field: { onChange, value } }) => (
+                <TextInput
+                  placeholder='Digite sua senha...'
+                  mode="outlined"
+                  secureTextEntry right={<TextInput.Icon icon="eye" />}
+                  theme={{ colors: { background: "ffffff" } }}
+                  onChangeText={onChange}
+                  value={value}
+                  onSubmitEditing={handleSubmit(handleSignUp)}
+                  returnKeyType='send'
+                />
+              )} />
+            {
+              errors.password?.message && <Text style={{ color: 'red' }}>{errors.password.message}</Text>
+            }
+
+
+          </View>
+
+          <View style={styles.createButton}>
+            <Text variant='titleMedium' style={styles.text} >Esqueci a senha!</Text>
+            <Button children='Acessar' mode='contained' icon="login" onPress={handleSubmit(handleSignUp)} />
+          </View>
+
         </View>
 
-        <Text style={styles.title}>Acesse a conta</Text>
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>E-mail</Text>
-
-          <Controller
-           control={control} 
-           name='email' 
-           
-           render={({ field: {onChange, value}})  => (
-              <TextInput
-                placeholder='Digite seu email...'  
-                mode="outlined" 
-                
-                right={<TextInput.Icon icon='email' />} 
-                theme={{colors: {background: "ffffff"} }}
-                onChangeText={onChange}
-                value={value}
-              />
-          )}/>
-          {
-            errors.email?.message && <Text style={{color: 'red'}}>{ errors.email.message }</Text>
-          }
-
-          
-        </View>
-
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>Senha</Text>
-
-          <Controller 
-          control={control} 
-          name='password' 
-        
-          render={({ field: {onChange, value}}) => (
-            <TextInput
-              placeholder='Digite sua senha...'  
-              mode="outlined" 
-              secureTextEntry right={<TextInput.Icon icon="eye" />}
-              theme={{colors: {background: "ffffff"} }}
-              onChangeText={onChange}
-              value={value}
-              onSubmitEditing={handleSubmit(handleSignUp)}
-              returnKeyType='send'
-            />
-          )}/>
-          {
-            errors.password?.message && <Text style={{color: 'red'}}>{ errors.password.message }</Text>
-          }
-          
-
-        </View>
-        
         <View style={styles.createButton}>
-          <Text variant='titleMedium' style={styles.text} >Esqueci a senha!</Text>
-          <Button children='Acessar' mode='contained' icon="login" onPress={handleSubmit(handleSignUp)}/>
-        </View>
-        
-      </View>
-
-    
-      <View style={styles.createButton}>
           <Text variant='titleMedium' style={styles.text}>Não possiu conta?</Text>
-          <Button children="Criar Conta" mode='contained' onPress={() => router.push('/signIn')}/>
+          <Button children="Criar Conta" mode='contained' onPress={() => router.push('/signIn')} />
+          <Button children="Voltar" mode='contained' icon="arrow-left" onPress={() => setScreen('logo')} />
+        </View>
+
       </View>
-    </View>
-  </ScrollView>
-    
+    </ScrollView>
+
   );
 }
 
