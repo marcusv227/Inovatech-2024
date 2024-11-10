@@ -24,8 +24,6 @@ type FormDataProps = {
 const signUpSchema = yup.object({
   name: yup.string().required("Informe o nome"),
   email: yup.string().required("Informe o email").email("Email inválido"),
-  cpf: yup.string().required("Informe o CPF").min(11, "O CPF deve ter 11 dígitos"),
-  number: yup.string().required("Informe o número").min(11, "O número deve ter 11 digitos"),
   password: yup.string().required("Informe a senha").min(6, "A senha dever ter pelo menos 6 dígitos"),
   password_confirm: yup.string().required('Confirme sua senha').oneOf([yup.ref("password"), ""], "A senha não confere")
 
@@ -113,51 +111,6 @@ export default function SignIn({ setScreen }) {
 
 
         </View>
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>Digite seu CPF</Text>
-
-          <Controller 
-          control={control} 
-          name='cpf' 
-        
-          render={({ field: {onChange, value}}) => (
-            <TextInput
-              placeholder='Digite seu CPF...'  
-              mode="outlined" 
-              theme={{colors: {background: "ffffff"} }}
-              onChangeText={onChange}
-              value={value}
-              
-              
-            />
-          )}/>
-          {
-            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
-          }
-        </View>
-        <View style={styles.input}>
-          <Text style={styles.inputLabel}>Digite seu número</Text>
-
-          <Controller 
-          control={control} 
-          name='number' 
-        
-          render={({ field: {onChange, value}}) => (
-            <TextInput
-              placeholder='Digite seu número...'  
-              mode="outlined" 
-
-              theme={{colors: {background: "ffffff"} }}
-              onChangeText={onChange}
-              value={value}
-              
-              
-            />
-          )}/>
-          {
-            errors.password_confirm?.message && <Text style={{color: 'red'}}>{ errors.password_confirm.message }</Text>
-          }
-        </View>
 
         <View style={styles.input}>
           <Text style={styles.inputLabel}>Senha</Text>
@@ -214,9 +167,7 @@ export default function SignIn({ setScreen }) {
         </View>
         
       </View>
-        <Modal message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={handleConfirmBack} onDismiss={hideModal}/>
-    
-      
+        <Modal message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={handleConfirmBack} onDismiss={hideModal}/>  
     </View>
   </ScrollView>
     

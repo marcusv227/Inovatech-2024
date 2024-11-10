@@ -6,8 +6,7 @@ import { Button } from '../src/components/button';
 import { useRouter } from 'expo-router';
 import { styles } from './styles/stylesSignUp'
 
-import LogoLogin from '../assets/logo.svg'
-import TipoLogin from '../assets/tipo.svg'
+import FullLogo from '../assets/SafewaysLogoFullLateral.svg'
 import { useForm, Controller } from 'react-hook-form';
 
 import * as yup from 'yup';
@@ -24,7 +23,7 @@ const signProfileSchema = yup.object({
 
 })
 
-export default function signUp({setScreen}) {
+export default function signUp({ setScreen }) {
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     resolver: yupResolver(signProfileSchema)
@@ -43,9 +42,7 @@ export default function signUp({setScreen}) {
         <View style={styles.formContainer}>
 
           <View style={styles.logo}>
-            <LogoLogin />
-            <TipoLogin style={styles.tipoLogin} />
-
+            <FullLogo />
           </View>
 
           <Text style={styles.title}>Acesse a conta</Text>

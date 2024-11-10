@@ -13,6 +13,7 @@ type Props = ComponentProps<typeof PaperButton> & {
 export function Button({ children, isLoading = false, icon, buttonColor = theme.colors.primary, textColor = "white", ...rest }: Props) {
     return (
         <PaperButton 
+            mode="contained"
             style={[styles.button, { backgroundColor: buttonColor }]}
             disabled={isLoading} 
             {...rest} 

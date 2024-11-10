@@ -20,16 +20,15 @@ const ProfileData: React.FC<ProfileDataProps> = ({ onLoginPress, onRegisterPress
         <View style={styles.container}>
             <Appbar.Header style={styles.header}>
                 <SafewaysSvg />
-                <Text style={styles.textHeader}>Perfil</Text>
+                <Text style={styles.textHeader}>Usuário</Text>
                 <Menu visible={visible}
+                    onDismiss={closeMenu}
                     contentStyle={{ backgroundColor: '#fafafa', width: 120, }}
                     anchor={
                         <IconButton icon="cog" onPress={openMenu} />
                     }
                     style={styles.menu}>
-                    <Menu.Item leadingIcon="exit-to-app" onPress={() => {
-                        closeMenu();
-                    }} title="Sair" />
+                    <Menu.Item title='Ajuda' leadingIcon="help" />
                 </Menu>
             </Appbar.Header>
 
@@ -40,17 +39,19 @@ const ProfileData: React.FC<ProfileDataProps> = ({ onLoginPress, onRegisterPress
                         style={styles.image}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+            </View>
+            <View style={styles.createButton}>
                     <Button
                         children='Login'
                         onPress={onLoginPress}
+                        style={styles.button}
                     />
                     <Button
                         children='Cadastrar'
                         onPress={onRegisterPress}
+                        style={styles.button}
                     />
                 </View>
-            </View>
         </View>
     );
 }

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button } from '../../src/components/button';
 import ProfileData from '../profileData';
 import SignIn from '../signIn';
 import SignUp from '../signUp';
-import { styles } from '../styles/stylesUser';
 
 export default function user() {
-  const [screen, setScreen] = useState('logo'); // controla qual tela exibir
+  const [screen, setScreen] = useState('logo');
 
   const renderScreen = () => {
     switch (screen) {
@@ -19,9 +17,9 @@ export default function user() {
           />
         );
       case 'login':
-        return <SignIn setScreen={setScreen} />;
-      case 'register':
         return <SignUp setScreen={setScreen} />;
+      case 'register':
+        return <SignIn setScreen={setScreen} />;
       default:
         return null;
     }
