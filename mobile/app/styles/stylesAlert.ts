@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     container: {
       flexGrow: 1,
       padding: 20,
-      backgroundColor: '#fff',
     },
     title: {
       fontSize: 24,
@@ -13,25 +12,24 @@ export const styles = StyleSheet.create({
       marginTop: 35
     },
     mainBox: {
-      backgroundColor: '#fff',
       padding: 10,
       borderRadius: 10,
     },
     innerBox: {
-      backgroundColor: '#fff',
       padding: 10,
       marginVertical: 5,
       borderRadius: 5,
       borderWidth: 1,
-      borderColor: '#ccc',
     },
     infoRow: {
       flexDirection: 'row',
+      gap: 5,
       alignItems: 'center',
       marginVertical: 5,
+      marginBottom: 5,  
     },
     infoText: {
-      color: '#000',
+      
       marginLeft: 10,
     },
     button: {
@@ -45,4 +43,5 @@ export const styles = StyleSheet.create({
       color: '#fff',
       fontSize: 16,
     },
+    
   });

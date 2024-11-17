@@ -2,15 +2,48 @@ import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
-import { FAB, Modal } from "react-native-paper";
+import { Button, FAB, TextInput } from "react-native-paper";
 import { styles } from '../styles/stylesIndex';
+import { Modal } from '../../src/components/modal';
 
-export default function Index() {
+
+import { useForm, Controller } from 'react-hook-form';
+
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
+
+
+type FormAlertProps = {
+    description: string
+}
+const alertUpSchema = yup.object({
+    description: yup.string().required("*O campo acima não pode está vazio")
+})
+
+
+export default function Index({description}:FormAlertProps) {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [loading, setLoading] = useState(true);
     const [locationPermissionDenied, setLocationPermissionDenied] = useState(false);
-    const [visible, setVisible] = useState(false)
+    
     const mapRef = useRef<MapView>(null);
+
+    const { control, handleSubmit, setValue, formState:{errors}, reset } = useForm<FormAlertProps>({
+        resolver: yupResolver(alertUpSchema),
+        defaultValues: { description: description || '' }, 
+    });
+
+    const handleFormSubmit = ({description}:FormAlertProps) => {
+        console.log('Formulário enviado com dados:', description); 
+        setVisible(false); 
+        reset(); 
+    };
+    
+    
+
+    const [visible, setVisible] = useState(false);
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
 
     const requestLocationPermission = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -63,6 +96,8 @@ export default function Index() {
             });
     }, []);
 
+  ;
+
     return (
         <View style={styles.container}>
             {locationPermissionDenied ? (
@@ -106,13 +141,50 @@ export default function Index() {
                         onPress={centerUserLocation}
                         color="white"
                     />
+                    
                     <FAB
                         icon="alert"
                         style={styles.fab2}
-                        onPress={() => Alert.alert('Teste')
-                        }
+                        onPress={showModal} 
                         color="white"
                     />
+                    <Modal
+                        visible={visible}
+                        onDismiss={() => {
+                            setVisible(false);
+                            reset({ description: "" }); 
+                        }}
+                        onConfirm={handleSubmit(handleFormSubmit)}
+                        title="Descrição da ocorrência"
+                        description={description} 
+                        isForm={true} 
+                        >
+                         <View >
+
+                            <Controller 
+                            control={control} 
+                            name='description' 
+
+                            render={({ field: {onChange, value}}) => (
+                            <TextInput
+                                placeholder='Descreva a ocorrência...'
+                                placeholderTextColor="#71717a" 
+                                mode="outlined" 
+                                theme={{colors: {background: "ffffff"} }}
+                                onChangeText={onChange}
+                                value={value}  
+                                multiline={true}
+                                textAlignVertical="top" 
+                                style={styles.inputModal}
+                            />
+                            )}/>
+
+                        </View>
+                        {
+                            errors.description?.message && <Text style={{color: 'red'}}>{ errors.description.message }</Text>
+                        }
+                    </Modal>
+
                 </>
             )}
         </View>

@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
         margin: 16,
         right: 0,
         bottom: 0,
+        width: 56,                
     },
     fab2: {
         backgroundColor: theme.colors.alert,
@@ -50,5 +51,15 @@ export const styles = StyleSheet.create({
         margin: 16,
         right: 0,
         bottom: 60,
+        width: 56,                 
+        height: 56,
+        borderRadius: 12, 
+        justifyContent: "center",
+        alignItems:'center'
     },
+    inputModal:{
+        width: '100%',
+        height: 200,
+        marginTop:5,
+    }
 });

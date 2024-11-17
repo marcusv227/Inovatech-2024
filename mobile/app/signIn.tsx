@@ -15,22 +15,23 @@ import { yupResolver } from '@hookform/resolvers/yup'
 type FormDataProps = {
   name: string
   email: string
-  number: string
-  cpf: string
   password: string
   password_confirm: string
 }
 
 const signUpSchema = yup.object({
-  name: yup.string().required("Informe o nome"),
+  name: yup.string().required("Informe o Nome"),
   email: yup.string().required("Informe o email").email("Email inválido"),
   password: yup.string().required("Informe a senha").min(6, "A senha dever ter pelo menos 6 dígitos"),
   password_confirm: yup.string().required('Confirme sua senha').oneOf([yup.ref("password"), ""], "A senha não confere")
 
 })
 
+type SignInProps = {
+  setScreen: (screen: string) => void; 
+}
 
-export default function SignIn({ setScreen }) {
+export default function SignIn({ setScreen }:SignInProps) {
   const {control,handleSubmit, formState: {errors} } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema)
   });
@@ -44,7 +45,7 @@ export default function SignIn({ setScreen }) {
 
   const handleConfirmBack = () => {
     hideModal();
-    router.push('/(tabs)/profile');
+    
   };
 
   function handleSignUp({name,email,password, password_confirm}:FormDataProps){
@@ -162,19 +163,19 @@ export default function SignIn({ setScreen }) {
 
       
         <View style={styles.createButton}>
-          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={() => setScreen('logo')}/>
+          <Button children="Voltar" mode='contained' icon="arrow-left" style={styles.button} onPress={showModal}/>
           <Button children='Criar ' mode='contained' icon="check" style={styles.button} onPress={handleSubmit(handleSignUp)}/>
         </View>
         
       </View>
-        <Modal message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={handleConfirmBack} onDismiss={hideModal}/>  
+        <Modal title='Confirmação de ação!' message='Todos os dados preenchidos serão apagados. Tem certeza de que deseja voltar?' visible={visible} onConfirm={() => setScreen('logo')} onDismiss={hideModal}/>  
     </View>
   </ScrollView>
     
   );
 }
 
-
+ 
 
 SignIn.options = {
   headerShow: false,
