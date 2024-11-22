@@ -1,4 +1,4 @@
-# Inovatech-2024
+# Inovatech-2024-SafeWays
 
 Projeto da turma SIS231N01 para o **Inovatech-2024**
 
@@ -34,7 +34,7 @@ Antes de iniciar o projeto, você precisará ter o seguinte instalado:
 3. **Inicie o projeto**:
 
    ```bash
-   expo start
+   npx expo start
    ```
 
    Isso abrirá uma nova janela no seu navegador com um QR code. Você pode escanear o QR code com o aplicativo Expo Go no seu dispositivo móvel para visualizar o aplicativo.
