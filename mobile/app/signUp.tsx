@@ -1,10 +1,10 @@
 
 import { View } from 'react-native';
-import { StyleSheet, ScrollView, } from 'react-native';
+import { ScrollView, } from 'react-native';
 import { TextInput, Text } from 'react-native-paper';
 import { Button } from '../src/components/button';
 import { useRouter } from 'expo-router';
-import { styles } from './styles/stylesSignUp'
+import { styles } from '../assets/styles/stylesSignUp';
 
 import FullLogo from '../assets/SafewaysLogoFullLateral.svg'
 import { useForm, Controller } from 'react-hook-form';
@@ -17,13 +17,17 @@ type FormDataProps = {
   password: string
 }
 
+type SignUpProps = {
+  setScreen: (screen: string) => void;
+}
+
 const signProfileSchema = yup.object({
   email: yup.string().required("Informe o email").email("Email inválido"),
   password: yup.string().required("Informe a senha"),
 
 })
 
-export default function signUp({ setScreen }) {
+export default function signUp({ setScreen }: SignUpProps) {
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     resolver: yupResolver(signProfileSchema)
@@ -106,7 +110,7 @@ export default function signUp({ setScreen }) {
 
         <View style={styles.createButton}>
           <Text variant='titleMedium' style={styles.text}>Não possiu conta?</Text>
-          <Button children="Criar Conta" mode='contained' onPress={() => router.push('/signIn')} />
+          <Button children="Criar Conta" mode='contained' onPress={() => setScreen('register')} />
           <Button children="Voltar" mode='contained' icon="arrow-left" onPress={() => setScreen('logo')} />
         </View>
 

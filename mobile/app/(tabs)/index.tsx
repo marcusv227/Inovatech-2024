@@ -1,45 +1,37 @@
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Circle } from "react-native-maps";  // Importando o Circle para desenhar os círculos no mapa
 import * as Location from 'expo-location';
 import { useEffect, useRef, useState } from 'react';
 import { Button, FAB, TextInput } from "react-native-paper";
-import { styles } from '../styles/stylesIndex';
+import { styles } from '../../assets/styles/stylesIndex';
 import { Modal } from '../../src/components/modal';
-
-
 import { useForm, Controller } from 'react-hook-form';
-
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
-
 
 type FormAlertProps = {
     description: string
 }
+
 const alertUpSchema = yup.object({
     description: yup.string().required("*O campo acima não pode está vazio")
 })
 
-
-export default function Index({description}:FormAlertProps) {
+export default function Index({ description }: FormAlertProps) {
     const [location, setLocation] = useState<Location.LocationObject | null>(null);
     const [loading, setLoading] = useState(true);
     const [locationPermissionDenied, setLocationPermissionDenied] = useState(false);
-    
     const mapRef = useRef<MapView>(null);
-
-    const { control, handleSubmit, setValue, formState:{errors}, reset } = useForm<FormAlertProps>({
+    const { control, handleSubmit, setValue, formState: { errors }, reset } = useForm<FormAlertProps>({
         resolver: yupResolver(alertUpSchema),
-        defaultValues: { description: description || '' }, 
+        defaultValues: { description: description || '' },
     });
 
-    const handleFormSubmit = ({description}:FormAlertProps) => {
-        console.log('Formulário enviado com dados:', description); 
-        setVisible(false); 
-        reset(); 
+    const handleFormSubmit = ({ description }: FormAlertProps) => {
+        console.log('Formulário enviado com dados:', description);
+        setVisible(false);
+        reset();
     };
-    
-    
 
     const [visible, setVisible] = useState(false);
     const showModal = () => setVisible(true);
@@ -57,7 +49,6 @@ export default function Index({description}:FormAlertProps) {
     const fetchLocation = async () => {
         try {
             const hasPermission = await requestLocationPermission();
-
             if (!hasPermission) {
                 setLocationPermissionDenied(true);
                 return;
@@ -89,14 +80,38 @@ export default function Index({description}:FormAlertProps) {
             },
             (res) => {
                 setLocation(res);
-
                 mapRef.current?.animateCamera({
                     center: res.coords,
                 });
             });
     }, []);
 
-  ;
+    const areasDePerigo = [
+        {
+            id: 1,
+            latitude: -3.10719,
+            longitude: -60.0261,
+            radius: 100,
+            description: "Área de risco 1 - Incidente de trânsito",
+            pessoasRelataram: 5
+        },
+        {
+            id: 2,
+            latitude: -3.123954,
+            longitude: -60.026702,
+            radius: 100,
+            description: "Área de risco 2 - Assalto a mão armada",
+            pessoasRelataram: 8
+        },
+        {
+            id: 3,
+            latitude: -3.101242,
+            longitude: -60.056925,
+            radius: 100,
+            description: "Área de risco 3 - Desabamento",
+            pessoasRelataram: 2
+        }
+    ];
 
     return (
         <View style={styles.container}>
@@ -125,7 +140,18 @@ export default function Index({description}:FormAlertProps) {
                             followsUserLocation={true}
                             showsMyLocationButton={false}
                             showsCompass={false}
-                        />
+                        >
+                            {areasDePerigo.map((area) => (
+                                <Circle
+                                    key={area.id}
+                                    center={{ latitude: area.latitude, longitude: area.longitude }}
+                                    radius={area.radius}
+                                    strokeColor="red"
+                                    fillColor="rgba(255, 0, 0, 0.3)"
+                                    strokeWidth={2}
+                                />
+                            ))}
+                        </MapView>
                     ) : (
                         <MapView style={styles.map}
                             initialRegion={{
@@ -141,50 +167,44 @@ export default function Index({description}:FormAlertProps) {
                         onPress={centerUserLocation}
                         color="white"
                     />
-                    
                     <FAB
                         icon="alert"
                         style={styles.fab2}
-                        onPress={showModal} 
+                        onPress={showModal}
                         color="white"
                     />
                     <Modal
                         visible={visible}
                         onDismiss={() => {
                             setVisible(false);
-                            reset({ description: "" }); 
+                            reset({ description: "" });
                         }}
                         onConfirm={handleSubmit(handleFormSubmit)}
                         title="Descrição da ocorrência"
-                        description={description} 
-                        isForm={true} 
-                        >
-                         <View >
-
-                            <Controller 
-                            control={control} 
-                            name='description' 
-
-                            render={({ field: {onChange, value}}) => (
-                            <TextInput
-                                placeholder='Descreva a ocorrência...'
-                                placeholderTextColor="#71717a" 
-                                mode="outlined" 
-                                theme={{colors: {background: "ffffff"} }}
-                                onChangeText={onChange}
-                                value={value}  
-                                multiline={true}
-                                textAlignVertical="top" 
-                                style={styles.inputModal}
+                        description={description}
+                        isForm={true}
+                    >
+                        <View>
+                            <Controller
+                                control={control}
+                                name='description'
+                                render={({ field: { onChange, value } }) => (
+                                    <TextInput
+                                        placeholder='Descreva a ocorrência...'
+                                        placeholderTextColor="#71717a"
+                                        mode="outlined"
+                                        theme={{ colors: { background: "ffffff" } }}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        multiline={true}
+                                        textAlignVertical="top"
+                                        style={styles.inputModal}
+                                    />
+                                )}
                             />
-                            )}/>
-
                         </View>
-                        {
-                            errors.description?.message && <Text style={{color: 'red'}}>{ errors.description.message }</Text>
-                        }
+                        {errors.description?.message && <Text style={{ color: 'red' }}>{errors.description.message}</Text>}
                     </Modal>
-
                 </>
             )}
         </View>

@@ -3,7 +3,7 @@ import { Text, Appbar, Menu, IconButton } from "react-native-paper";
 import { Button } from "../src/components/button";
 import SafewaysSvg from "../assets/SafewaysLogo.svg";
 import { useState } from "react";
-import { styles } from './styles/stylesProfile';
+import { styles } from '../assets/styles/stylesProfile';
 
 interface ProfileDataProps {
     onLoginPress: () => void;
@@ -41,17 +41,17 @@ const ProfileData: React.FC<ProfileDataProps> = ({ onLoginPress, onRegisterPress
                 </View>
             </View>
             <View style={styles.createButton}>
-                    <Button
-                        children='Login'
-                        onPress={onLoginPress}
-                        style={styles.button}
-                    />
-                    <Button
-                        children='Cadastrar'
-                        onPress={onRegisterPress}
-                        style={styles.button}
-                    />
-                </View>
+                <Button
+                    children='Login'
+                    onPress={onLoginPress}
+                    style={styles.button}
+                />
+                <Button
+                    children='Cadastrar'
+                    onPress={onRegisterPress}
+                    style={styles.button}
+                />
+            </View>
         </View>
     );
 }
