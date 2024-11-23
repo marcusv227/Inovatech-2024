@@ -110,7 +110,23 @@ export default function Index({ description }: FormAlertProps) {
             radius: 100,
             description: "Área de risco 3 - Desabamento",
             pessoasRelataram: 2
-        }
+        },
+        {
+            id: 4,
+            latitude: -3.028352,
+            longitude: -59.928522,
+            radius: 100,
+            description: "Área de risco 4 - roubo de veículos",
+            pessoasRelataram: 5
+        },
+        {
+            id: 5,
+            latitude: -3.141209,
+            longitude: -60.010049,
+            radius: 100,
+            description: "Área de risco 5 - Boca de fumo",
+            pessoasRelataram: 10
+        },
     ];
 
     return (
