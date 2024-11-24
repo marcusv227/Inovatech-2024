@@ -1,4 +1,4 @@
-# Inovatech-2024
+# Inovatech-2024-SafeWays
 
 Projeto da turma SIS231N01 para o **Inovatech-2024**
 

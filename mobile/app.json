@@ -31,7 +31,8 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Permitir Inovatech acessar sua localização."
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

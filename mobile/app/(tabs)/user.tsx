@@ -11,15 +11,15 @@ export default function user() {
     switch (screen) {
       case 'logo':
         return (
-          <ProfileData
-            onLoginPress={() => setScreen('login')}
-            onRegisterPress={() => setScreen('register')}
+          <ProfileData        
+            onLoginPress={ () => setScreen('login') }
+            onRegisterPress={ () => setScreen('register') }
           />
         );
       case 'login':
-        return <SignUp setScreen={setScreen} />;
+        return <SignUp setScreen={setScreen}  />;
       case 'register':
-        return <SignIn setScreen={setScreen} />;
+        return <SignIn setScreen={setScreen}  />;
       default:
         return null;
     }
