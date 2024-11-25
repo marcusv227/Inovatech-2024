@@ -43,5 +43,26 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
   },
+  card: {
+    marginBottom: 10,
+    borderRadius: 8,
+    overflow: 'hidden',
+    backgroundColor: '#fafafa'
+  },
+  expandedCard: {
+    backgroundColor: '#d4d4d8',
+  },
+  cardHeader: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  
+  descriptionText: {
+    fontSize: 14,
+    marginTop: 10,
+    fontWeight: 'bold',
+    
+  },
 
 });

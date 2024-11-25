@@ -91,7 +91,7 @@ export default function Index({ description }: FormAlertProps) {
             id: 1,
             latitude: -3.10719,
             longitude: -60.0261,
-            radius: 100,
+            radius: 200,
             description: "Área de risco 1 - Incidente de trânsito",
             pessoasRelataram: 5
         },
@@ -99,7 +99,7 @@ export default function Index({ description }: FormAlertProps) {
             id: 2,
             latitude: -3.123954,
             longitude: -60.026702,
-            radius: 100,
+            radius: 200,
             description: "Área de risco 2 - Assalto a mão armada",
             pessoasRelataram: 8
         },
@@ -107,7 +107,7 @@ export default function Index({ description }: FormAlertProps) {
             id: 3,
             latitude: -3.101242,
             longitude: -60.056925,
-            radius: 100,
+            radius: 200,
             description: "Área de risco 3 - Desabamento",
             pessoasRelataram: 2
         },
@@ -115,7 +115,7 @@ export default function Index({ description }: FormAlertProps) {
             id: 4,
             latitude: -3.028352,
             longitude: -59.928522,
-            radius: 100,
+            radius: 200,
             description: "Área de risco 4 - roubo de veículos",
             pessoasRelataram: 5
         },
@@ -123,7 +123,15 @@ export default function Index({ description }: FormAlertProps) {
             id: 5,
             latitude: -3.141209,
             longitude: -60.010049,
-            radius: 100,
+            radius: 200,
+            description: "Área de risco 5 - Boca de fumo",
+            pessoasRelataram: 10
+        },
+        {
+            id: 6,
+            latitude: -3.036268,
+            longitude: -60.010049,
+            radius: 200,
             description: "Área de risco 5 - Boca de fumo",
             pessoasRelataram: 10
         },
@@ -165,7 +173,11 @@ export default function Index({ description }: FormAlertProps) {
                                     strokeColor="red"
                                     fillColor="rgba(255, 0, 0, 0.3)"
                                     strokeWidth={2}
+                                    
                                 />
+                                
+                                    
+                                
                             ))}
                         </MapView>
                     ) : (
